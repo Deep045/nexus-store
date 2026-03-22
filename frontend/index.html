@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Premium Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">NEX<span>US</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="search-box">
+      <span style="color:var(--text3);font-size:14px">⌕</span>
+      <input type="text" id="search-inp" placeholder="Search products…">
+    </div>
+    <div id="auth-btns" style="display:flex;gap:.5rem">
+      <button class="nav-btn" onclick="openModal('login')">Login</button>
+      <button class="nav-btn accent" onclick="openModal('register')">Sign Up</button>
+    </div>
+    <div id="user-menu" style="display:none;align-items:center;gap:.5rem">
+      <span id="user-greeting" style="font-size:13px;color:var(--text2)"></span>
+      <button class="nav-btn" onclick="logout()">Logout</button>
+    </div>
+    <button class="nav-btn" onclick="openCart()" style="position:relative">
+      🛒 Cart <span class="cart-bubble" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="badge"><span class="badge-dot"></span>New Collection 2025 — Now Live</div>
+  <h1>Shop Without<br><span class="gold">Limits.</span></h1>
+  <p>Millions of products, zero compromise. Electronics, fashion, home, beauty — all in one premium destination.</p>
+  <div class="hero-ctas">
+    <a href="#products" class="btn btn-gold">Explore Store →</a>
+    <a href="#deals" class="btn btn-outline">Today's Deals</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2M+</div><div class="stat-label">Products</div></div>
+    <div><div class="stat-num">180+</div><div class="stat-label">Brands</div></div>
+    <div><div class="stat-num">98%</div><div class="stat-label">Satisfaction</div></div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>Electronics</span><span class="dot">✦</span><span>Fashion</span><span class="dot">✦</span><span>Home &amp; Kitchen</span><span class="dot">✦</span><span>Beauty</span><span class="dot">✦</span><span>Sports</span><span class="dot">✦</span><span>Books</span><span class="dot">✦</span><span>Toys</span><span class="dot">✦</span><span>Health</span><span class="dot">✦</span>
+    <span>Electronics</span><span class="dot">✦</span><span>Fashion</span><span class="dot">✦</span><span>Home &amp; Kitchen</span><span class="dot">✦</span><span>Beauty</span><span class="dot">✦</span><span>Sports</span><span class="dot">✦</span><span>Books</span><span class="dot">✦</span><span>Toys</span><span class="dot">✦</span><span>Health</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section id="categories" style="background:var(--bg2)">
+  <div class="sec-header">
+    <div><p class="sec-label">Browse By</p><h2 class="sec-title">All Categories</h2></div>
+    <a href="#products" class="sec-link">View All →</a>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="#products" onclick="setFilter('Electronics')"><span class="cat-icon">📱</span><div class="cat-name">Electronics</div><div class="cat-count">48,320 items</div></a>
+    <a class="cat-card" href="#products" onclick="setFilter('Fashion')"><span class="cat-icon">👗</span><div class="cat-name">Fashion</div><div class="cat-count">1.2M items</div></a>
+    <a class="cat-card" href="#products" onclick="setFilter('Home')"><span class="cat-icon">🏠</span><div class="cat-name">Home &amp; Kitchen</div><div class="cat-count">320,000 items</div></a>
+    <a class="cat-card" href="#products" onclick="setFilter('Beauty')"><span class="cat-icon">💄</span><div class="cat-name">Beauty</div><div class="cat-count">90,500 items</div></a>
+    <a class="cat-card" href="#products" onclick="setFilter('Sports')"><span class="cat-icon">⚽</span><div class="cat-name">Sports</div><div class="cat-count">240,000 items</div></a>
+    <a class="cat-card" href="#products" onclick="setFilter('Books')"><span class="cat-icon">📚</span><div class="cat-name">Books</div><div class="cat-count">5M items</div></a>
+  </div>
+</section>
+
+<section id="products">
+  <div class="sec-header">
+    <div><p class="sec-label">Trending Now</p><h2 class="sec-title">Featured Products</h2></div>
+    <a href="#" class="sec-link">See All →</a>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="applyFilter('All',this)">All</button>
+    <button class="filter-btn" onclick="applyFilter('Electronics',this)">Electronics</button>
+    <button class="filter-btn" onclick="applyFilter('Fashion',this)">Fashion</button>
+    <button class="filter-btn" onclick="applyFilter('Home',this)">Home</button>
+    <button class="filter-btn" onclick="applyFilter('Beauty',this)">Beauty</button>
+    <button class="filter-btn" onclick="applyFilter('Sports',this)">Sports</button>
+  </div>
+  <div id="products-grid" class="products-grid">
+    <div class="loading-grid" style="grid-column:1/-1"><div class="spinner"></div>Loading products…</div>
+  </div>
+</section>
+
+<div class="features">
+  <div class="features-grid">
+    <div class="feat"><span class="feat-icon">🚀</span><div class="feat-title">Lightning Delivery</div><div class="feat-desc">Same-day &amp; next-day options</div></div>
+    <div class="feat"><span class="feat-icon">🔒</span><div class="feat-title">Secure Payments</div><div class="feat-desc">256-bit SSL encryption</div></div>
+    <div class="feat"><span class="feat-icon">↩️</span><div class="feat-title">Easy Returns</div><div class="feat-desc">30-day hassle-free policy</div></div>
+    <div class="feat"><span class="feat-icon">🎧</span><div class="feat-title">24/7 Support</div><div class="feat-desc">Real humans, always here</div></div>
+  </div>
+</div>
+
+<section id="deals">
+  <div class="sec-header">
+    <div><p class="sec-label">Limited Time</p><h2 class="sec-title">Hot Deals</h2></div>
+  </div>
+  <div class="deals-grid">
+    <div class="deal-hero">
+      <div style="flex:1">
+        <span class="deal-tag">🔥 Deal of the Day</span>
+        <h3 class="deal-title">Sony WH-1000XM5<br>Wireless Headphones</h3>
+        <div class="deal-price">₹24,999 <span class="deal-was">₹34,990</span></div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:1rem">Best-in-class noise cancellation. 30hr battery.</p>
+        <div class="countdown">
+          <div class="cd-unit"><span class="cd-num" id="cd-h">08</span><span class="cd-label">Hours</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">45</span><span class="cd-label">Mins</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">22</span><span class="cd-label">Secs</span></div>
+        </div>
+        <button class="btn btn-gold" onclick="quickAdd({name:'Sony WH-1000XM5',emoji:'🎧',price:24999,category:'Electronics'})">Add to Cart</button>
+      </div>
+      <div class="deal-emoji-big">🎧</div>
+    </div>
+    <div class="deals-side">
+      <div class="deal-small" onclick="quickAdd({name:'Nike Air Max 270',emoji:'👟',price:8999,category:'Fashion'})">
+        <div class="ds-icon">👟</div><div><div class="ds-tag">28% OFF</div><div class="ds-name">Nike Air Max 270</div><div><span class="ds-price">₹8,999</span><span class="ds-was">₹12,499</span></div></div>
+      </div>
+      <div class="deal-small" onclick="quickAdd({name:'Instant Pot Duo',emoji:'🍲',price:6499,category:'Home'})">
+        <div class="ds-icon">🍲</div><div><div class="ds-tag">35% OFF</div><div class="ds-name">Instant Pot Duo 7-in-1</div><div><span class="ds-price">₹6,499</span><span class="ds-was">₹9,999</span></div></div>
+      </div>
+      <div class="deal-small" onclick="quickAdd({name:'Kindle Paperwhite',emoji:'📖',price:9999,category:'Electronics'})">
+        <div class="ds-icon">📖</div><div><div class="ds-tag">20% OFF</div><div class="ds-name">Kindle Paperwhite 2024</div><div><span class="ds-price">₹9,999</span><span class="ds-was">₹12,499</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="newsletter" id="contact">
+  <p class="sec-label" style="text-align:center">Stay in the Loop</p>
+  <h2>Get Exclusive Deals</h2>
+  <p>Subscribe to unlock member-only discounts and early access to sales.</p>
+  <div class="nl-form">
+    <input type="email" class="nl-input" id="nl-email" placeholder="your@email.com">
+    <button class="btn btn-gold" onclick="subscribe()">Subscribe</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">NEX<span>US</span></div>
+      <p class="footer-desc">Your ultimate shopping destination. Millions of products, unbeatable prices, delivered to your doorstep.</p>
+      <div class="socials">
+        <a href="https://github.com" target="_blank" class="social">GH</a>
+        <a href="#" class="social">𝕏</a>
+        <a href="#" class="social">in</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links"><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Today's Deals</a></li><li><a href="#">Electronics</a></li><li><a href="#">Fashion</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links"><li><a href="#">Track Order</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">FAQs</a></li><li><a href="#">Live Chat</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links"><li><a href="#">About NEXUS</a></li><li><a href="#">Careers</a></li><li><a href="#">Sell With Us</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="f-copy">© 2025 NEXUS Store. Built for GitHub Portfolio.</p>
+    <a href="https://github.com" class="f-gh">View on GitHub →</a>
+  </div>
+</footer>
+
+<div class="modal-bg" id="auth-modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head">
+    <div class="cart-head-title">Your Cart (<span id="cart-item-count">0</span>)</div>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span class="cs-label">Subtotal</span><span class="cs-value">₹<span id="cart-total">0</span></span></div>
+    <p class="cart-note">Free delivery over ₹499 · GST included</p>
+    <button class="btn btn-gold" style="width:100%;text-align:center" onclick="checkout()">Checkout →</button>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
