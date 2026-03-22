@@ -2,6 +2,13 @@
 
 > Dark & premium e-commerce platform — Node.js · Express · MongoDB · Razorpay
 
+
+
+## 🔗 Live Project
+
+Frontend: https://serene-starlight-be4f52.netlify.app  
+Backend: https://nexus-backend-sd2q.onrender.com  
+API: https://nexus-backend-sd2q.onrender.com/api/products
 ## Folder Structure
 
 ```

@@ -16,7 +16,7 @@ async function api(method, path, body) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch("https://nexus-backend-sd2q.onrender.com/api/...", opts);
+  const res = await fetch(API + path, opts); 
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || 'Something went wrong');
   return data;
@@ -147,15 +147,19 @@ async function loadProducts(filter = 'All', search = '') {
     if (search) url += `&search=${encodeURIComponent(search)}`;
     const data = await api('GET', url);
     renderProducts(data.products);
-  } catch {
-    // Fallback static products when backend isn't running
-    const filtered = FALLBACK_PRODUCTS.filter(p => filter === 'All' || p.category === filter);
-    const searched = search
-      ? filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
-      : filtered;
-    console.log(data);
-    renderProducts(searched);
-  }
+  } catch (err) {
+        console.log("API Error:", err);
+
+          const filtered = FALLBACK_PRODUCTS.filter(p => 
+           filter === 'All' || p.category === filter
+         );
+
+        const searched = search
+        ? filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+        : filtered;
+
+         renderProducts(searched);
+     }
 }
 
 function renderProducts(products) {
