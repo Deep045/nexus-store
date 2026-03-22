@@ -189,7 +189,7 @@ function renderProducts(products) {
             ₹${(p.price || 0).toLocaleString()}
             ${p.oldPrice ? `<span class="p-old">₹${p.oldPrice.toLocaleString()}</span>` : ''}
           </div>
-            <button class="add-btn" onclick="addToCart('${p._id || p.id}', ... )">
+            <button class="add-btn" onclick="addToCart('${p._id || p.id}')">
              + Add
             </button>
         </div>
