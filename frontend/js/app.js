@@ -148,18 +148,20 @@ async function loadProducts(filter = 'All', search = '') {
     const data = await api('GET', url);
     renderProducts(data.products);
   } catch (err) {
-        console.log("API Error:", err);
+    console.log("API Error:", err);
 
-          const filtered = FALLBACK_PRODUCTS.filter(p => 
-           filter === 'All' || p.category === filter
-         );
+    const filtered = FALLBACK_PRODUCTS.filter(p =>
+        filter === 'All' || p.category === filter
+    );
 
-        const searched = search
-        ? filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    const searched = search
+        ? filtered.filter(p =>
+            p.name.toLowerCase().includes(search.toLowerCase())
+        )
         : filtered;
 
-         renderProducts(searched);
-     }
+    renderProducts(searched);
+}
 }
 
 function renderProducts(products) {
