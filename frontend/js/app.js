@@ -1,5 +1,6 @@
 // ── Config ──
-const API = '';  // same origin — backend serves frontend
+const BASE_URL = "https://nexus-backend-sd2q.onrender.com";
+const API = BASE_URL;  // same origin — backend serves frontend
 let token = localStorage.getItem('nexus_token');
 let currentUser = JSON.parse(localStorage.getItem('nexus_user') || 'null');
 let cart = [];
@@ -15,7 +16,7 @@ async function api(method, path, body) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(API + path, opts);
+  const res = await fetch("https://nexus-backend-sd2q.onrender.com/api/...", opts);
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || 'Something went wrong');
   return data;
@@ -225,7 +226,7 @@ async function loadCart() {
 async function updateCart(productId, quantity) {
   const token = localStorage.getItem("nexus_token");
 
-  const res = await fetch("/api/cart", {
+  const res = await fetch(`${BASE_URL}/api/cart`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

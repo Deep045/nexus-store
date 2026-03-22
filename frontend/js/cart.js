@@ -1,7 +1,8 @@
+const BASE_URL = "https://nexus-backend-sd2q.onrender.com";
 async function loadCart() {
   const token = localStorage.getItem("nexus_token");
 
-  const res = await fetch("/api/cart", {
+  const res = await fetch(`${BASE_URL}/api/cart`,{
     headers: {
       "Authorization": `Bearer ${token}`
     }
