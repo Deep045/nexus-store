@@ -21,7 +21,7 @@ router.post('/', protect, async (req, res) => {
     const { productId, quantity = 1 } = req.body;
     const product = await Product.findById(productId);
     if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
-    if (product.stock < quantity)
+    if (product.countInStock < quantity)
       return res.status(400).json({ success: false, message: 'Not enough stock' });
 
     let cart = await Cart.findOne({ user: req.user._id });
